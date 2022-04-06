@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:latest
+    build: .
+    volumes:
+      - ./data/db:/data/db
+      - ./data/log:/var/log/mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=123123
+    ports:
+      - 27017:27017
+    restart: always
+    container_name: "mongo-master"
+    # networks:
+    #   default:
+    #     ipv4_address: 10.6.0.2
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "2"
+    #       memory: "2G"
+networks:
+  default:
+    external:
+      name: services
