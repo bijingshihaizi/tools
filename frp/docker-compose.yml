@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  frps:
+    image: "snowdreamtech/frps:latest"
+    ports:
+        - "7000:7000"
+        - "8081:8081"
+        - "10022-10100:10022-10100"
+    network_mode: bridge
+    stdin_open: true # -i interactive
+    tty: true # -t tty
+    privileged: true
+    volumes:
+       - ./frps.ini:/etc/frp/frps.ini
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "2"
+    restart: always
